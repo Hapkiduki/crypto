@@ -1,3 +1,4 @@
+import 'package:core/src/base_command.dart';
 import 'package:core/src/result.dart';
 import 'package:flutter/foundation.dart';
 
@@ -18,7 +19,7 @@ import 'package:flutter/foundation.dart';
 /// Consume the action result by listening to [isExecuting] and [result],
 /// and handle the states accordingly.
 /// {@endtemplate}
-class Command<T, Params> {
+class Command<T, Params> implements BaseCommand<T> {
   /// {@macro command}
   Command(this._action);
 
@@ -42,6 +43,9 @@ class Command<T, Params> {
   /// result has been cleared.
   /// {@endtemplate}
   final ValueNotifier<Result<T>?> result = ValueNotifier<Result<T>?>(null);
+
+  @override
+  ValueListenable<Result<T>?> get resultNotifier => result;
 
   /// {@template execute}
   /// Executes the action with the given [params].

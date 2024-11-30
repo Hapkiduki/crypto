@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:core/src/base_command.dart';
 import 'package:core/src/result.dart';
 import 'package:flutter/foundation.dart';
 
@@ -16,7 +17,7 @@ import 'package:flutter/foundation.dart';
 /// Consume the action result by listening to [isListening] and [latestResult],
 /// and handle the states accordingly.
 /// {@endtemplate}
-class StreamCommand<T, Params> {
+class StreamCommand<T, Params> implements BaseCommand<T> {
   /// {@macro stream_command}
   StreamCommand(this._action);
 
@@ -38,6 +39,9 @@ class StreamCommand<T, Params> {
   /// This is a [ValueNotifier] that notifies listeners when a new result is available.
   /// {@endtemplate}
   final ValueNotifier<Result<T>?> latestResult = ValueNotifier<Result<T>?>(null);
+
+  @override
+  ValueListenable<Result<T>?> get resultNotifier => latestResult;
 
   StreamSubscription<Result<T>>? _subscription;
 
