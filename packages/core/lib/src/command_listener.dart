@@ -1,5 +1,5 @@
+import 'package:core/core.dart';
 import 'package:core/src/base_command.dart';
-import 'package:core/src/result.dart';
 import 'package:flutter/widgets.dart';
 
 /// Configuration class for a command listener.
