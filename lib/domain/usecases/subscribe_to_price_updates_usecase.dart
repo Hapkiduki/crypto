@@ -1,6 +1,7 @@
-import 'package:core/core.dart';
+import 'package:commandy/commandy.dart';
 import 'package:crypto/data/models/price.dart';
 import 'package:crypto/data/repositories/crypto_repository.dart';
+import 'package:crypto/domain/usecases/base_use_case.dart';
 import 'package:flutter/foundation.dart';
 
 class SubscribeToPriceUpdatesUseCase implements StreamUseCase<Price, List<String>> {
@@ -16,7 +17,7 @@ class SubscribeToPriceUpdatesUseCase implements StreamUseCase<Price, List<String
       }
     } catch (e, s) {
       debugPrint('Error en los precios: $e');
-      yield Error(
+      yield FailureResult(
         Failure(
           message: 'Failed to subscribe to price updates',
           exception: e,

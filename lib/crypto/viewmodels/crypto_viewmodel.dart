@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:commandy/commandy.dart';
 import 'package:crypto/data/models/cryptocurrency.dart';
 import 'package:crypto/data/models/price.dart';
 import 'package:crypto/domain/usecases/get_cryptocurrencies_usecase.dart';
@@ -31,9 +31,6 @@ class CryptoViewModel extends ChangeNotifier {
   List<Cryptocurrency> cryptocurrencies = [];
   Map<String, Price> prices = {};
 
-  /// Holds any error message that occurs during operations
-  String? errorMessage;
-
   /// Initializes the ViewModel by fetching cryptocurrencies and starting price updates
   Future<void> _initialize() async {
     await getCryptocurrenciesCommand.execute(NoParams());
@@ -45,10 +42,6 @@ class CryptoViewModel extends ChangeNotifier {
       final cryptoIds = cryptocurrencies.map((c) => c.id).toList();
       priceUpdatesCommand.start(cryptoIds);
       priceUpdatesCommand.latestResult.addListener(_onPriceUpdate);
-    } else if (result is Error<List<Cryptocurrency>>) {
-      // Handle error by setting the error message
-      errorMessage = result.failure.message;
-      notifyListeners();
     }
   }
 
@@ -58,14 +51,10 @@ class CryptoViewModel extends ChangeNotifier {
     result.fold(
       (data) {
         cryptocurrencies = data;
-        errorMessage = null; // Clear any previous errors
+
         notifyListeners();
       },
-      (failure) {
-        // Handle failure by setting the error message
-        errorMessage = failure.message;
-        notifyListeners();
-      },
+      (failure) {},
     );
     return result;
   }
@@ -82,22 +71,11 @@ class CryptoViewModel extends ChangeNotifier {
       result.fold(
         (price) {
           prices[price.cryptoId] = price;
-          errorMessage = null; // Clear any previous errors
           notifyListeners();
         },
-        (failure) {
-          // Handle error by setting the error message
-          errorMessage = failure.message;
-          notifyListeners();
-        },
+        (failure) {},
       );
     }
-  }
-
-  /// Clears the current error message and notifies listeners
-  void clearError() {
-    errorMessage = null;
-    notifyListeners();
   }
 
   @override

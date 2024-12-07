@@ -41,12 +41,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
-  core:
+  commandy:
     dependency: "direct main"
     description:
-      path: "packages/core"
-      relative: true
-    source: path
+      name: commandy
+      sha256: a3f6b35fe959bd6caf6d772753527f0f19cbfb90a28800f0145a37570b3d06d7
+      url: "https://pub.dev"
+    source: hosted
     version: "0.1.0+1"
   dio:
     dependency: "direct main"
@@ -175,14 +176,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -191,14 +184,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
-  provider:
-    dependency: "direct main"
-    description:
-      name: provider
-      sha256: c8a055ee5ce3fd98d6fc872478b03823ffdb448699c6ebdbbc71d59b596fd48c
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.1.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -294,4 +279,4 @@ packages:
     version: "1.1.0"
 sdks:
   dart: ">=3.5.0 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  flutter: ">=3.24.0"
